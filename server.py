@@ -20,7 +20,7 @@ def save_data(items):
         json.dump(items, f) # substitui o conteúdo do arquivo persistente
 
 class ThreadedXMLRPCServer(ThreadingMixIn, SimpleXMLRPCServer): # Servidor herda de ThreadingMixIn (Cria uma nova thread para cada requisição) e SimpleXMLRPCServer (Recebe conexões XML-RPC)
-    pass
+    pass # aqui como maior parte do tranalho do servidor é I/O, o GIL é liberado, e outras threads podem processar outras requisições. Portanto a ganho real, o que não aconteceria se fosse CPU-Bound.
 
 class ShoppingListService:
     def __init__(self): # ao instanciar, carrega a lista existente em self.items
