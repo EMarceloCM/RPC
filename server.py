@@ -5,7 +5,8 @@ from xmlrpc.server import SimpleXMLRPCServer
 from socketserver import ThreadingMixIn
 
 DATA_FILE = 'shopping_list.json'
-lock = threading.Lock() # usado nos métodos que modificam a lista, garantindo exclusão mútua
+lock = threading.Lock() # usado nos métodos que modificam a lista, garantindo exclusão mútua pois as threads compartilham o mesmo espaço de memória (self.items).
+# se duas threads modificarem essa lista ao mesmo tempo, podem ocorrer itens duplicados, atualizações errdas etc.
 
 def load_data():
     try:
