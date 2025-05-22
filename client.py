@@ -1,18 +1,18 @@
 import sys
 from xmlrpc.client import ServerProxy
 
-proxy = ServerProxy('http://localhost:8000/', allow_none=True)
+proxy = ServerProxy('http://localhost:8000/', allow_none=True) # instancia um objeto proxy que aponta para o servidor XML-RPC
 
-def usage():
+def usage(): # função que será chamada quando o cliente digitar um comando inválido
     print('Commands: add <item>, list, mark <item> <value>, mark_all <value>, remove <item>, total <year> <month>')
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        usage()
+        usage() # se não houver argumentos exibe a mensagem de ajuda e retorna erro
         sys.exit(1)
-    cmd = sys.argv[1]
+    cmd = sys.argv[1] # recebe o primeiro argumento do script e verifica a qual comando pertence
     if cmd == 'add':
-        print(proxy.add_item(sys.argv[2]))
+        print(proxy.add_item(sys.argv[2])) # imprime o resultado da invocação do método remoto
     elif cmd == 'list':
         print(proxy.list_items())
     elif cmd == 'mark':
